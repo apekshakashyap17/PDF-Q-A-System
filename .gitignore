@@ -1,0 +1,14 @@
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+chroma_db/
+.chroma/
+.env
+.env.local
+.DS_Store
+.vscode/
+.idea/
+*.log
