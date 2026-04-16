@@ -6,3 +6,4 @@ ollama
 pypdf
 chromadb
 langchain-ollama
+langchain_huggingface
