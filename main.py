@@ -20,18 +20,16 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 if prompt := st.chat_input("What would you like to know?"):
-    # Add user message to history
+  
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Generate Assistant Response
+   
     with st.chat_message("assistant"):
         with st.spinner("Analyzing PDF context..."):
-            # Call your RAG function
-            # Note: Ensure query_rag returns just the text string
+          
             response = query_rag(prompt) 
             st.markdown(response)
     
-    # Add assistant message to history
     st.session_state.messages.append({"role": "assistant", "content": response})
