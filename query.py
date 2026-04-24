@@ -19,33 +19,29 @@ Answer the question based on the above context: {question}
 
 
 def query_rag(question):
-    # 1️⃣ Load embedding model (same one used while storing data)
     embedding = embedding_function()
 
-    # 2️⃣ Load existing Chroma vector database from disk
     db = Chroma(
         persist_directory=CHROMA_PATH,
         embedding_function=embedding
     )
 
-    # 3️⃣ Search the database for relevant chunks
     results = db.similarity_search(question, k=5)
 
-    # 4️⃣ Combine all retrieved chunks into one context string
     context = "\n\n".join([doc.page_content for doc in results])
 
-    # 5️⃣ Create prompt with context + user question
+    
     prompt = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     formatted_prompt = prompt.format(
         context=context,
         question=question
     )
 
-    # 6️⃣ Send prompt to LLM
+    
     llm = ChatOllama(model="llama3.2")
     response = llm.invoke(formatted_prompt)
 
-    # 7️⃣ Print answer
+    
     print("\nAnswer:")
     print(response.content)
 
